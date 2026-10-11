@@ -23,7 +23,7 @@ export class IniciarSesionComponent {
     this.authService.login(usuario).subscribe({
       next: (respuesta) => {
         console.log('Inicio de sesión correcto', respuesta);
-        this.authService.guardarToken(respuesta.token, respuesta.rol);
+        this.authService.guardarToken(respuesta.token, respuesta.rol, respuesta.nombre, respuesta.correo);
         this.router.navigate(['/home']);
       },
       error: (error) => {

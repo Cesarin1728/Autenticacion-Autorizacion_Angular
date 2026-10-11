@@ -18,9 +18,11 @@ export class AuthService {
         return this.http.post<RespuestaLogin>(`${this.url}/login`, usuario);
     }
 
-    guardarToken(token: string, rol: string) {
+    guardarToken(token: string, rol: string, nombre: string, correo: string) {
         localStorage.setItem('token', token);
         localStorage.setItem('rol', rol);
+        localStorage.setItem('nombre', nombre);
+        localStorage.setItem('correo', correo);
     }
 
     obtenerToken() {
@@ -34,10 +36,20 @@ export class AuthService {
     cerrarSesion() {
         localStorage.removeItem('token');
         localStorage.removeItem('rol');
+        localStorage.removeItem('nombre');
+        localStorage.removeItem('correo');
     }
 
     obtenerRol() {
         return localStorage.getItem('rol');
+    }
+
+    obtenerNombre() {
+        return localStorage.getItem('nombre');
+    }
+
+    obtenerCorreo() {
+        return localStorage.getItem('correo');
     }
 
     tieneRol(rolesPermitidos: string[]): boolean {

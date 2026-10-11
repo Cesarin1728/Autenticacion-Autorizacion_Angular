@@ -43,3 +43,9 @@
     border-radius: 10px;
     font: 400 26px 'Times New Roman', serif;
 }
+
+.dato {
+    margin: 20px 0 0;
+    text-align: center;
+    font-size: 18px;
+}

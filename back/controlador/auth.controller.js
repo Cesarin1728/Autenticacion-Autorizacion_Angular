@@ -52,6 +52,7 @@ function login(req, res) {
         res.json({
             token: token,
             nombre: usuario.nombre,
+            correo: usuario.correo,
             rol: usuario.rol
         });
     });
