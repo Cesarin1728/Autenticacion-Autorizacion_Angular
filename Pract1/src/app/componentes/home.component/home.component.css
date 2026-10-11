@@ -1,0 +1,45 @@
+.barra {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ede0d0;
+    border: 2px solid #222;
+    font: bold 18px Arial, sans-serif;
+}
+
+.fondo {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)),
+        url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZd55qMWThRRUQ7EPVP-PGyHpJmRcJiNijy0B-9rscHA&s=10') center / cover no-repeat;
+}
+
+.tarjeta {
+    width: 500px;
+    max-width: 90%;
+    box-sizing: border-box;
+    padding: 60px 40px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid #222;
+    border-radius: 10px;
+}
+
+.titulo {
+    margin: 0;
+    padding: 14px 0;
+    text-align: center;
+    background: #ede0d0;
+    border: 2px solid #222;
+    border-radius: 10px;
+    font: 400 26px 'Times New Roman', serif;
+}
