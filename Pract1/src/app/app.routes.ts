@@ -21,7 +21,7 @@ export const routes: Routes = [
         component: HomeComponent,
         canActivate: [authGuard, roleGuard],
         data: {
-            roles: ['Admin', 'Cliente', 'Trabajador']
+            roles: ['Admin', 'Almacen', 'Trabajador']
         }
     },
     {

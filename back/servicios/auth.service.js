@@ -24,7 +24,20 @@ function buscarPorCorreo(correo, callback) {
     });
 }
 
+// Consulta para buscar el usuario por id
+function buscarPorId(id, callback) {
+    const sql = 'SELECT * FROM usuarios WHERE id = ?';
+
+    conexion.query(sql, [id], (error, resultados) => {
+        if (error) {
+            return callback(error, null);
+        }
+        callback(null, resultados);
+    });
+}
+
 module.exports = {
     registrarUsuario,
-    buscarPorCorreo
+    buscarPorCorreo,
+    buscarPorId
 };

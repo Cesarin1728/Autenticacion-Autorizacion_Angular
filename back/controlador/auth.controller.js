@@ -58,7 +58,29 @@ function login(req, res) {
     });
 }
 
+// Controlador de Perfil
+function perfil(req, res) {
+    authService.buscarPorId(req.usuario.id, (error, resultados) => {
+        if (error) {
+            return res.status(500).json({ mensaje: 'Error del servidor' });
+        }
+
+        if (resultados.length === 0) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+
+        const usuario = resultados[0];
+
+        res.json({
+            nombre: usuario.nombre,
+            correo: usuario.correo,
+            rol: usuario.rol
+        });
+    });
+}
+
 module.exports = {
     registro,
-    login
+    login,
+    perfil
 };

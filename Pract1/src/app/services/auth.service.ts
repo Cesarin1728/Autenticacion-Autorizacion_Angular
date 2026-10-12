@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Credenciales } from '../modelos/credenciales';
 import { RespuestaLogin } from '../modelos/respuesta-login';
+import { Perfil } from '../modelos/perfil';
 
 @Injectable({
     providedIn: 'root'
@@ -50,6 +51,13 @@ export class AuthService {
 
     obtenerCorreo() {
         return localStorage.getItem('correo');
+    }
+
+    // Consultar la ruta protegida enviando el token
+    obtenerPerfil(): Observable<Perfil> {
+        return this.http.get<Perfil>(`${this.url}/perfil`, {
+            headers: { Authorization: `Bearer ${this.obtenerToken()}` }
+        });
     }
 
     tieneRol(rolesPermitidos: string[]): boolean {

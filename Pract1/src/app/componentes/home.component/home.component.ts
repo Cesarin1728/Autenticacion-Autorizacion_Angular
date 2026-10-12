@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -8,13 +9,28 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  nombre: string | null;
-  correo: string | null;
-  rol: string | null;
+  nombre = signal<string | null>(null);
+  correo = signal<string | null>(null);
+  rol = signal<string | null>(null);
 
-  constructor(private authService: AuthService) {
-    this.nombre = this.authService.obtenerNombre();
-    this.correo = this.authService.obtenerCorreo();
-    this.rol = this.authService.obtenerRol();
+  constructor(private authService: AuthService, private router: Router) {
+    this.nombre.set(this.authService.obtenerNombre());
+    this.correo.set(this.authService.obtenerCorreo());
+    this.rol.set(this.authService.obtenerRol());
+
+    // El backend vuelve a validar el token
+    this.authService.obtenerPerfil().subscribe({
+      next: (perfil) => {
+        this.nombre.set(perfil.nombre);
+        this.correo.set(perfil.correo);
+        this.rol.set(perfil.rol);
+      },
+      error: (error) => {
+        if (error.status === 401) {
+          this.authService.cerrarSesion();
+          this.router.navigate(['/login']);
+        }
+      }
+    });
   }
 }
