@@ -7,7 +7,7 @@ import { roleGuard } from './guards/role-guard';
 
 export const routes: Routes = [
     // { path: '', component: IniciarSesionComponent }
-    {
+    { // Si no hay nada, lleva a login 
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'
@@ -20,7 +20,7 @@ export const routes: Routes = [
         path: 'home',
         component: HomeComponent,
         canActivate: [authGuard, roleGuard],
-        data: {
+        data: { // roleGuard lee la lista de los roles permitidos
             roles: ['Admin', 'Almacen', 'Trabajador']
         }
     },

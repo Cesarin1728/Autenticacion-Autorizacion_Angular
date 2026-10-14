@@ -7,7 +7,7 @@ export const roleGuard: CanActivateFn = (
     const authService = inject(AuthService);
     const router = inject(Router);
 
-    // Obtenemos los roles permitidos en la ruta
+    // Obtenemos los roles permitidos en la ruta. Del data de app.ruotes.ts
     const rolesPermitidos: string[] = route.data['roles'] ?? [];
 
     // Verificar que exista una sesion

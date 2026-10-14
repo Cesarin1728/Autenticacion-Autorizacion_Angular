@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); // Para crear el tooken
 const authService = require('../servicios/auth.service');
 
 // Controlador de Registro
@@ -18,9 +18,9 @@ function registro(req, res) {
 
 // Controlador de Login
 function login(req, res) {
-    const { correo, contrasena } = req.body;
+    const { correo, contrasena } = req.body; // Datos que manda el front en el cuerpo de la petición
 
-    authService.buscarPorCorreo(correo, (error, resultados) => {
+    authService.buscarPorCorreo(correo, (error, resultados) => { // Buscamos al usuario por correo
         if (error) {
             return res.status(500).json({ mensaje: 'Error del servidor' });
         }
@@ -29,7 +29,7 @@ function login(req, res) {
             return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
         }
 
-        const usuario = resultados[0];
+        const usuario = resultados[0]; // Primer usuario encontrado
 
         // De momento sin hash, se valida el string directo
         const passwordValido = (contrasena === usuario.contrasena);
@@ -38,7 +38,7 @@ function login(req, res) {
             return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
         }
 
-        const token = jwt.sign(
+        const token = jwt.sign( // Creamos el token con los datos del usuario y la clave secreta del .env
             {
                 id: usuario.id,
                 rol: usuario.rol
@@ -49,7 +49,7 @@ function login(req, res) {
             }
         );
 
-        res.json({
+        res.json({ // Respuesta al front, la contraseña no se manda
             token: token,
             nombre: usuario.nombre,
             correo: usuario.correo,
@@ -60,7 +60,7 @@ function login(req, res) {
 
 // Controlador de Perfil
 function perfil(req, res) {
-    authService.buscarPorId(req.usuario.id, (error, resultados) => {
+    authService.buscarPorId(req.usuario.id, (error, resultados) => { // req.usuario lo dejó el middleware validarToken (contiene id y rol del token)
         if (error) {
             return res.status(500).json({ mensaje: 'Error del servidor' });
         }

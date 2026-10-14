@@ -6,9 +6,9 @@ function registrarUsuario(callback) {
 
     conexion.query(sql, (error, resultado) => {
         if (error) {
-            return callback(error, null);
+            return callback(error, null); // devolvemos el error al controlador
         }
-        callback(null, resultado);
+        callback(null, resultado); // devolvemos el resultado al controlador
     });
 }
 

@@ -20,7 +20,7 @@ export class IniciarSesionComponent {
       contrasena: datos.get('password') as string
     };
 
-    this.authService.login(usuario).subscribe({
+    this.authService.login(usuario).subscribe({ // Enviamos las credenciales a authService.login
       next: (respuesta) => {
         console.log('Inicio de sesión correcto', respuesta);
         this.authService.guardarToken(respuesta.token, respuesta.rol, respuesta.nombre, respuesta.correo);

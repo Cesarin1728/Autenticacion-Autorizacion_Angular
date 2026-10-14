@@ -10,7 +10,7 @@ import { Perfil } from '../modelos/perfil';
 })
 
 export class AuthService {
-    private url = 'http://localhost:3000/api';
+    private url = 'http://localhost:3000/api'; // Dirección del back
 
     constructor(private http: HttpClient) {}
 
